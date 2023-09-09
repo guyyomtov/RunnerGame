@@ -54,7 +54,14 @@ MonoBehaviour:
   moveSpeed: 5
   jumpForce: 10
   gravityScale: 2
+  moveDirection: {x: 0, y: 0, z: 0}
   rotateSpeed: 5
+  isKnocking: 0
+  knockBackLength: 0.5
+  knockBackCounter: 0
+  knockBackPower: {x: 3, y: 3}
+  flashCounter: 5
+  flashDelay: 0.5
 --- !u!143 &6810376110477837788
 CharacterController:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4299073782186302460
+--- !u!1 &4498029929442756484
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,60 +8,53 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4299073782186302462}
-  - component: {fileID: 4299073782186302463}
-  - component: {fileID: 668179627}
+  - component: {fileID: 4498029929442756483}
+  - component: {fileID: 4498029929442756482}
+  - component: {fileID: 4498029929442756485}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: KillZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4299073782186302462
+--- !u!4 &4498029929442756483
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299073782186302460}
+  m_GameObject: {fileID: 4498029929442756484}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8128269, y: -0.47250605, z: 2.1434567}
+  m_LocalPosition: {x: 0, y: -1.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4299073782186302463
+--- !u!114 &4498029929442756482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299073782186302460}
+  m_GameObject: {fileID: 4498029929442756484}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17c61d41d884c184a89aabc800bdd8ad, type: 3}
+  m_Script: {fileID: 11500000, guid: d7db46787cf910c488fdb5bd7433a344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerController: {fileID: 0}
-  deathEffect: {fileID: 1346149259773521819, guid: 043a2bafd8ac98a47b008ce0029e303b,
-    type: 3}
---- !u!114 &668179627
-MonoBehaviour:
+--- !u!65 &4498029929442756485
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4299073782186302460}
+  m_GameObject: {fileID: 4498029929442756484}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 934193a2469d80b4fb04a301edd4575a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  currentHealth: 0
-  invincibleLength: 2
-  invincibleCounter: 0
-  playerController: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 75, y: 1, z: 75}
+  m_Center: {x: 0, y: 0, z: 0}
