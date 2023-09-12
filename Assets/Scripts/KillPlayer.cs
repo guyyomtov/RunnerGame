@@ -20,10 +20,9 @@ public class KillPlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("here");
         if (other.tag == eCharacters.Player.ToString())
         {
-            Debug.Log("here1");
+            HealthManager.Instance.IncreaseHealth();
             GameManager.Instance.Respawn();
         }
     }

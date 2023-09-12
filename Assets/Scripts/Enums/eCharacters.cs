@@ -2,6 +2,7 @@
 {
     public enum eCharacters
     {
-        Player
+        Player,
+        Enemy
     }
 }

@@ -10,7 +10,7 @@ public class NavTest : MonoBehaviour
     [SerializeField] private NavMeshAgent agent;
     void Start()
     {
-        agent.SetDestination(target.position);
+        agent.SetDestination(target.position); 
     }
 
     // Update is called once per frame

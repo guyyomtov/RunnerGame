@@ -95,5 +95,14 @@ public class HealthManager : MonoBehaviour
     {
         UIManager.Instance.healthText.text = currentHealth.ToString();
     }
-    
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
+    public void IncreaseHealth()
+    {
+        currentHealth -= 1;
+        UpdateUIHealthText();
+    }
 }

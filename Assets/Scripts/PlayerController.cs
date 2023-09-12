@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private Transform transformPlayer;
+    [SerializeField] public Transform transformPlayer;
     [SerializeField] private Transform transformAnimation;
     [SerializeField] private CharacterController characterController;
     [SerializeField] private Camera camera;
@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 knockBackPower;
     [SerializeField] private float flashCounter;
     [SerializeField] private float flashDelay;
+    [SerializeField] private float bounceForce = 8f;
     
     
     public Vector3 startTrasform { get; private set; }
@@ -41,52 +42,62 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isKnocking)
+        if (!GameManager.Instance.GetIsGameOver())
         {
-            float lastYValue = moveDirection.y;
-            // moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
-            moveDirection = (transformPlayer.forward * Input.GetAxisRaw("Vertical")) + (transformPlayer.right * Input.GetAxisRaw("Horizontal"));
-            moveDirection.Normalize();
-            moveDirection = moveDirection * moveSpeed;
-            moveDirection.y = lastYValue;
-            if (characterController.isGrounded)
+            if (!isKnocking )
             {
-                //moveDirection.y = startTrasform.y;
-                if (Input.GetButtonDown("Jump"))
+                float lastYValue = moveDirection.y;
+                // moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+                moveDirection = (transformPlayer.forward * Input.GetAxisRaw("Vertical")) + (transformPlayer.right * Input.GetAxisRaw("Horizontal"));
+                moveDirection.Normalize();
+                moveDirection = moveDirection * moveSpeed;
+                moveDirection.y = lastYValue;
+                if (characterController.isGrounded)
                 {
-                    moveDirection.y = jumpForce;
+                    //moveDirection.y = startTrasform.y;
+                    if (Input.GetButtonDown("Jump"))
+                    {
+                        moveDirection.y = jumpForce;
+                    }
+                }
+                moveDirection.y += (Physics.gravity.y * Time.deltaTime * gravityScale);
+                characterController.Move(moveDirection * Time.deltaTime);
+                if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+                {
+                    transformPlayer.rotation = Quaternion.Euler(0f, camera.transform.rotation.eulerAngles.y, 0f);
+                    Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
+                    //transformAnimation.rotation = newRotation;
+                    transformAnimation.rotation = Quaternion.Slerp(transformAnimation.rotation, newRotation, rotateSpeed * Time.deltaTime);
+                }    
+            }
+            else
+            {
+                knockBackCounter -= Time.deltaTime;
+                
+                float lastYValue = moveDirection.y;
+                moveDirection = (transformPlayer.forward * knockBackPower.x * -1f);
+                moveDirection.y = lastYValue;
+            
+                if (characterController.isGrounded)
+                {
+                    moveDirection.y = 0f;
+                }
+                moveDirection.y += (Physics.gravity.y * Time.deltaTime * gravityScale);
+                characterController.Move(moveDirection * Time.deltaTime);
+                if (knockBackCounter <= 0)
+                {
+                    isKnocking = false;
                 }
             }
-            moveDirection.y += (Physics.gravity.y * Time.deltaTime * gravityScale);
-            characterController.Move(moveDirection * Time.deltaTime);
-            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
-            {
-                transformPlayer.rotation = Quaternion.Euler(0f, camera.transform.rotation.eulerAngles.y, 0f);
-                Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
-                //transformAnimation.rotation = newRotation;
-                transformAnimation.rotation = Quaternion.Slerp(transformAnimation.rotation, newRotation, rotateSpeed * Time.deltaTime);
-            }    
         }
-        else
-        {
-            knockBackCounter -= Time.deltaTime;
-            
-            float lastYValue = moveDirection.y;
-            moveDirection = (transformPlayer.forward * knockBackPower.x * -1f);
-            moveDirection.y = lastYValue;
+      
 
-            if (characterController.isGrounded)
-            {
-                moveDirection.y = 0f;
-            }
+        if (GameManager.Instance.GetIsGameOver())
+        {
+            moveDirection = Vector3.zero;
             moveDirection.y += (Physics.gravity.y * Time.deltaTime * gravityScale);
-            characterController.Move(moveDirection * Time.deltaTime);
-            if (knockBackCounter <= 0)
-            {
-                isKnocking = false;
-            }
+            characterController.Move(moveDirection);
         }
-        
         animator.SetFloat("Speed", Math.Abs(moveDirection.x+ moveDirection.z));
         animator.SetBool("Grounded", characterController.isGrounded);
     }
@@ -105,5 +116,11 @@ public class PlayerController : MonoBehaviour
         gameObject.SetActive(false);
         await UniTask.Delay(TimeSpan.FromSeconds(flashDelay));
         gameObject.SetActive(true);
-    } 
+    }
+
+    public void Bounce()
+    {
+        moveDirection.y = bounceForce;
+        characterController.Move(moveDirection * Time.deltaTime);
+    }
 }
