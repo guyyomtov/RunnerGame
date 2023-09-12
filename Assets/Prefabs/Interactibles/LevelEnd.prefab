@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 4856603769240825255}
+  levelEndMusic: 3
 --- !u!1001 &4856603769770005485
 PrefabInstance:
   m_ObjectHideFlags: 0

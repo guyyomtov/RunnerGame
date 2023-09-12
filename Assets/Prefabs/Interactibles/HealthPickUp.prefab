@@ -63,6 +63,7 @@ MonoBehaviour:
   isFullHeal: 0
   healthEffect: {fileID: 106713483928962216, guid: 1b154e8b0a18f5a44a62d3554aeaee66,
     type: 3}
+  soundToPlay: 3
 --- !u!1001 &9151786950055420909
 PrefabInstance:
   m_ObjectHideFlags: 0

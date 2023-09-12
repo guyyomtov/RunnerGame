@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] public bool fadeToBlack, fadeFromBlack;
     [SerializeField] public TextMeshProUGUI healthText;
     [SerializeField] public TextMeshProUGUI coinsText;
+    [SerializeField] public TextMeshProUGUI newLevelText;
     public static UIManager Instance { get; private set; }
     private void Awake()
     {
@@ -58,6 +59,10 @@ public class UIManager : MonoBehaviour
                 fadeFromBlack = false;
             }
         }
+    }
+
+    public void UpdateLevelText(int currentLevel)
+    {
         
     }
 }

@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         AddCoins(0);
+        AudioManager.Instance.PlayMusic(currentLevel - 1);
     }
     // Update is called once per frame
     void Update()
@@ -73,6 +74,11 @@ public class GameManager : MonoBehaviour
     {
         totalCoins += coinsToAdd;
         UIManager.Instance.coinsText.text = totalCoins.ToString();
+    }
+
+    public void UpdateLevelText()
+    {
+        UIManager.Instance.coinsText.text = $"LEVEL {currentLevel.ToString()}";
     }
     //I did that function because I didnt want to make the PlayerController singleton so I expose what I need about the player from the GameManager
     public Transform PlayerCurrentTranform

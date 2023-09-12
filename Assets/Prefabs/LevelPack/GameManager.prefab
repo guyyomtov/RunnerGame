@@ -2453,6 +2453,10 @@ MonoBehaviour:
   playerController: {fileID: 0}
   deathEffect: {fileID: 1346149259773521819, guid: 043a2bafd8ac98a47b008ce0029e303b,
     type: 3}
+  totalCoins: 0
+  isGameOver: 0
+  totalLevels: 3
+  gameOverMusic: 8
 --- !u!114 &668179627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2470,7 +2474,7 @@ MonoBehaviour:
   invincibleLength: 2
   invincibleCounter: 0
   playerController: {fileID: 0}
-  soundToPlay: 8
+  soundToPlay: 4
 --- !u!114 &668179628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2487,17 +2491,8 @@ MonoBehaviour:
   - {fileID: 956903901}
   - {fileID: 749541967}
   - {fileID: 1390475188}
-  - {fileID: 1110347123}
-  - {fileID: 1581870862}
-  - {fileID: 1507126521}
-  - {fileID: 1866464300}
-  - {fileID: 1768862392}
   - {fileID: 1195903572}
   sfx:
-  - {fileID: 1491123572}
-  - {fileID: 1700929215}
-  - {fileID: 1611607038}
-  - {fileID: 542323515}
   - {fileID: 2046335205}
   - {fileID: 119556355}
   - {fileID: 928970833}

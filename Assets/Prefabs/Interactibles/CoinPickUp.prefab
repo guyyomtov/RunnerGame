@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinsWorth: 1
-  soundToPlay: 5
+  soundToPlay: 1
   coinEffect: {fileID: 1898057918087687266, guid: 12c5ccdfa0cd12e47ab87795e1a311c6,
     type: 3}
 --- !u!95 &8561731526152037818
