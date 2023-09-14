@@ -15,8 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private bool isGameOver;
     private static int currentLevel = 1;
     [SerializeField] private int totalLevels = 3;
-    [SerializeField] private int gameOverMusic = 8;
-    
+
 
     public Vector3 RespawnPos { get; set; }
     
@@ -59,12 +58,12 @@ public class GameManager : MonoBehaviour
         Instantiate(deathEffect, playerController.transform.position + new Vector3(0f,1f,0f), playerController.transform.rotation);
         //wait for 2 seconds
         await UniTask.Delay(TimeSpan.FromSeconds(2));
-        UIManager.Instance.fadeFromBlack = true;
         if (isGameOver || HealthManager.Instance.GetCurrentHealth() == 0)
         {
-            GameOver(gameOverMusic);
+            await GameOverLose();
             return;
         }
+        UIManager.Instance.fadeFromBlack = true;
         Debug.Log(RespawnPos);
         playerController.transform.position = RespawnPos;
         playerController.gameObject.SetActive(true);
@@ -97,21 +96,36 @@ public class GameManager : MonoBehaviour
     {
         return isGameOver;
     } 
-    public async UniTask GameOver(int levelEndMusic)
+    public async UniTask GameOverLose()
     {
+        Debug.Log("starting game over processing");
+        isGameOver = true;
+        await UniTask.Delay(TimeSpan.FromSeconds(2));
+        Debug.Log($"current health: {HealthManager.Instance.GetCurrentHealth()}");
+        if (HealthManager.Instance.GetCurrentHealth() == 0)
+        {
+            Debug.Log("Going to load main menu");
+            SceneManager.LoadScene(0);
+        }
+    }
+    public async UniTask GameOverVictory(int levelEndMusic)
+    {
+        Debug.Log("starting game over processing");
         AudioManager.Instance.PlayMusic(levelEndMusic);
         isGameOver = true;
         await UniTask.Delay(TimeSpan.FromSeconds(2));
+        Debug.Log($"current health: {HealthManager.Instance.GetCurrentHealth()}");
         currentLevel += 1;
-        if (currentLevel > totalLevels || HealthManager.Instance.GetCurrentHealth() == 0)
+        if (currentLevel > totalLevels)
         {
-            await SceneManager.LoadSceneAsync(0);
+            SceneManager.LoadScene(0);
         }
         else
         {
             Debug.Log($" current level {currentLevel}");
-            await SceneManager.LoadSceneAsync(currentLevel);
+            SceneManager.LoadScene(currentLevel);
         }
+        
     }
 
 }

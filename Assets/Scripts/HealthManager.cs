@@ -61,7 +61,7 @@ public class HealthManager : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                GameManager.Instance.Respawn();
+                await GameManager.Instance.Respawn();
             }
             else
             {

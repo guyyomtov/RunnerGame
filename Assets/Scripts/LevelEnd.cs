@@ -25,7 +25,7 @@ public class LevelEnd : MonoBehaviour
         if (other.tag == eCharacters.Player.ToString())
         {
             anim.SetTrigger("Hit");
-            GameManager.Instance.GameOver(levelEndMusic);
+            GameManager.Instance.GameOverVictory(levelEndMusic);
         }
     }
 }
