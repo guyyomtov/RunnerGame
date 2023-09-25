@@ -18,7 +18,12 @@ public class GameManager : MonoBehaviour
 
 
     public Vector3 RespawnPos { get; set; }
-    
+
+    private void initGame()
+    {
+        currentLevel = 1;
+        totalCoins = 0;
+    }
     private void Awake()
     {
         if (Instance == null)
@@ -104,6 +109,7 @@ public class GameManager : MonoBehaviour
         Debug.Log($"current health: {HealthManager.Instance.GetCurrentHealth()}");
         if (HealthManager.Instance.GetCurrentHealth() == 0)
         {
+            initGame();
             Debug.Log("Going to load main menu");
             SceneManager.LoadScene(0);
         }
@@ -118,6 +124,7 @@ public class GameManager : MonoBehaviour
         currentLevel += 1;
         if (currentLevel > totalLevels)
         {
+            initGame();
             SceneManager.LoadScene(0);
         }
         else
