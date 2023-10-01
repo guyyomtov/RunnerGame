@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31d9e508de0d7b49ac1f8f4d1098cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthAmount: 3
+  healthAmount: 1
   isFullHeal: 0
   healthEffect: {fileID: 106713483928962216, guid: 1b154e8b0a18f5a44a62d3554aeaee66,
     type: 3}
