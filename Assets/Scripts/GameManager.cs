@@ -94,7 +94,10 @@ public class GameManager : MonoBehaviour
     }
     public void BouncePlayer()
     {
-        playerController.Bounce();
+        if (!isGameOver)
+        {
+            playerController.Bounce();
+        }
     }
 
     public bool GetIsGameOver()
